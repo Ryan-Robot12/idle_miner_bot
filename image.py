@@ -20,6 +20,6 @@ class GameImage:
         rectangle = []
         if location:
             # Gets the first time the image is found
-            location = location[0]
+            location = location[-1]
             rectangle = [location[0], location[1], image.shape[1], image.shape[0]]
         return rectangle
