@@ -130,6 +130,12 @@ def main():
 
         elif find_upgrade_arrow(screenshot):
             rectangle, is_elevator = find_upgrade_arrow(screenshot)
+            if rectangle[1] > 600:
+                scroll(False, 3)
+            sleep(0.2)
+            screenshot = update_screenshot()
+            sleep(0.2)
+            rectangle, is_elevator = find_upgrade_arrow(screenshot)
             if rectangle:
                 if is_elevator == 1:
                     click(get_center_of_rectangle(rectangle)[0] - 10, get_center_of_rectangle(rectangle)[1] + 10,
@@ -153,7 +159,14 @@ def main():
                     sleep(0.2)
         elif stacked_up_arrow.find(screenshot):
             rectangle = stacked_up_arrow.find(screenshot)
-            click(get_center_of_rectangle(rectangle)[0] + 5, get_center_of_rectangle(rectangle)[1] + 10,
+            if rectangle[1] > 600:
+                scroll(False, 3)
+            sleep(0.2)
+            screenshot = update_screenshot()
+            sleep(0.2)
+            rectangle = stacked_up_arrow.find(screenshot)
+            if rectangle:
+                click(get_center_of_rectangle(rectangle)[0] + 5, get_center_of_rectangle(rectangle)[1] + 10,
                   window_rectangle)
             sleep(0.2)
             do_again = True
@@ -169,6 +182,13 @@ def main():
                 sleep(0.2)
 
         elif upgrade_arrow.find(screenshot):
+            rectangle = upgrade_arrow.find(screenshot)
+            # print(rectangle)
+            if rectangle[1] > 600:
+                scroll(False, 3)
+            sleep(0.2)
+            screenshot = update_screenshot()
+            sleep(0.2)
             rectangle = upgrade_arrow.find(screenshot)
             if rectangle:
                 click(get_center_of_rectangle(rectangle)[0] + 5, get_center_of_rectangle(rectangle)[1] + 10,
@@ -188,6 +208,7 @@ def main():
                     sleep(0.2)
         else:
             # print('...')
+            # pass
             _sky = sky.find(screenshot)
             _rocks = get(stop_scrolling, screenshot)
             # _rocks = stop_scrolling.find(screenshot)
@@ -233,3 +254,5 @@ while True:
             print("Error running main. Text: " + str(e))
             failures += 1
             print("Failures: " + str(failures))
+            sleep(5)
+# main()
